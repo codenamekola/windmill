@@ -2,6 +2,7 @@ const express = require('express');
 //bring in express graphql which allows express communicate with the graphql api
 const graphqlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 
 const schema = require('./schema/schema');
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://kolabobo:Armadillo1!@ds123645.mlab.com:23645/windmil
 mongoose.connection.once('open',()=>{
     console.log('connected to db');
 });
+app.use(express.static(path.join(__dirname,'client/build')));
 //use the grahqlhttp object as middleware
 app.use('/graphql',graphqlHTTP({//express will pass requests to this endpoint to graphql
     //this middleware needs a schema to inform express-graphql of how our data is structured
