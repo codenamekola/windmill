@@ -2,12 +2,15 @@ const express = require('express');
 //bring in express graphql which allows express communicate with the graphql api
 const graphqlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const schema = require('./schema/schema');
 
 const app = express();
 
 const port = process.env.port || 4000;
+//setup to allow cross-origin requests
+app.use(cors());
 //connect to mlab mongodb database
 mongoose.connect('mongodb://kolabobo:Armadillo1!@ds123645.mlab.com:23645/windmill',{useNewUrlParser:true});
 //inform us when db connection is established
